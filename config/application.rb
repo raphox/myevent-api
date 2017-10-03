@@ -29,5 +29,10 @@ module MyEventApi
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+
+    config.generators do |g|
+      g.orm :mongoid # Set Mongoid as default ORM
+      g.test_framework :rspec # Set Rspec as default test framework
+    end
   end
 end

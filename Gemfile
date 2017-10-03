@@ -23,7 +23,16 @@ gem 'puma', '~> 3.7'
 # gem 'capistrano-rails', group: :development
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
-# gem 'rack-cors'
+gem 'rack-cors'
+
+# Custom Seralize objects
+gem 'active_model_serializers'
+
+# Pagination library
+gem 'kaminari'
+
+# Mongoid is the officially supported ODM (Object-Document-Mapper) framework for MongoDB in Ruby.
+gem 'mongoid'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -35,6 +44,23 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+end
+
+group :test do
+  # Set of strategies for cleaning your database in Ruby
+  gem 'database_cleaner'
+
+  # Fixtures replacement with a straightforward definition syntax
+  gem 'factory_girl_rails'
+
+  # Testing framework
+  gem 'rspec-rails'
+
+  # This gem brings back assigns to your controller tests as well as assert_template to both controller and integration tests.
+  gem 'rails-controller-testing'
+
+  # Code coverage analysis tool for Ruby
+  gem 'simplecov', :require => false
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
