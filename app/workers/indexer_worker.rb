@@ -3,7 +3,7 @@ class IndexerWorker
   sidekiq_options queue: 'elasticsearch', retry: false
 
   Logger = Sidekiq.logger.level == Logger::DEBUG ? Sidekiq.logger : nil
-  Client = Elasticsearch::Client.new host: 'localhost:9200', logger: Logger
+  Client = Elasticsearch::Client.new host: (ENV['BONSAI_URL'] || 'localhost:9200'), logger: Logger
 
   def perform(operation, record_id)
     logger.debug [operation, "ID: #{record_id}"]
