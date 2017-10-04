@@ -3,9 +3,26 @@ class MyEventsController < ApplicationController
 
   # GET /my_events
   def index
-    @my_events = MyEvent.all
+    params[:page] ||= {}
+
+    @my_events = MyEvent.page(params[:page][:number])
+      .per(params[:page][:size])
 
     render json: @my_events
+  end
+
+  # GET /my_events/autocomplete
+  def autocomplete
+    params[:page] ||= {}
+
+    # Collect results without access to database to improve performance
+    @my_events = MyEvent.page(params[:page][:number])
+      .per(params[:page][:size])
+      .search(params[:q])
+      .results
+      .map{ |r| MyEvent.new(r._source.to_hash.merge({ id: r._id })) }
+
+    render json: @my_events, each_serializer: MyEventAutocompleteSerializer
   end
 
   # GET /my_events/1
@@ -48,5 +65,6 @@ class MyEventsController < ApplicationController
     def my_event_params
       params.require(:my_event).permit(:event_type, :remote_ip,
         :referer => [:scheme, :host, :path, :query, :fragment])
+        .merge(request: request)
     end
 end

@@ -30,9 +30,17 @@ gem 'active_model_serializers'
 
 # Pagination library
 gem 'kaminari'
+gem 'kaminari-mongoid'
 
 # Mongoid is the officially supported ODM (Object-Document-Mapper) framework for MongoDB in Ruby.
 gem 'mongoid'
+
+# Simple, efficient background processing for Ruby http://sidekiq.org
+gem 'sidekiq'
+
+# Elasticsearch integrations for ActiveModel/Record and Ruby on Rails
+gem 'elasticsearch-model'
+gem 'elasticsearch-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

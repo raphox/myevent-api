@@ -7,6 +7,10 @@ RSpec.describe MyEventsController, type: :routing do
       expect(:get => "/my_events").to route_to("my_events#index")
     end
 
+    it "routes to #autocomplete" do
+      expect(:get => "/my_events/autocomplete").to route_to("my_events#autocomplete")
+    end
+
     it "routes to #show" do
       expect(:get => "/my_events/1").to route_to("my_events#show", :id => "1")
     end

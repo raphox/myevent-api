@@ -3,10 +3,14 @@ require 'resolv'
 class MyEvent
   include Mongoid::Document
   include Mongoid::Timestamps
+  include Elasticsearch::Model
 
   field :event_type, type: String
   field :referer, type: Hash
   field :remote_ip, type: String
+
+  after_save    { IndexerWorker.perform_async(:index,  self.id) }
+  after_destroy { IndexerWorker.perform_async(:delete, self.id) }
 
   module TYPES
     ALL = %w(get post put patch delete options head)
@@ -25,19 +29,25 @@ class MyEvent
 
     # URI constructor class convert referer URL into an object
     # https://ruby-doc.org/stdlib-2.4.2/libdoc/uri/rdoc/URI.html#module-URI-label-Basic+example
-    uri = request.referer ? URI(request.referer) : nil
+    if request.referer
+      uri = URI(request.referer)
 
-    write_attribute(:referer, {
-      scheme: uri.scheme,
-      host: uri.host,
-      path: uri.path,
-      query: uri.query,
-      fragment: uri.fragment
-    })
+      write_attribute(:referer, {
+        scheme: uri.scheme,
+        host: uri.host,
+        path: uri.path,
+        query: uri.query,
+        fragment: uri.fragment
+      })
+    end
   end
 
   def url
     self.referer && [self.referer[:scheme], '://', self.referer[:host],
       self.referer[:path], self.referer[:query], self.referer[:fragment]].compact.join('')
+  end
+
+  def as_indexed_json(options={})
+    as_json(except: [:id, :_id])
   end
 end

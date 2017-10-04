@@ -52,6 +52,14 @@ RSpec.describe MyEventsController, type: :controller do
     end
   end
 
+  describe "GET #autocomplete" do
+    it "returns a success response" do
+      my_event = MyEvent.create! valid_attributes
+      get :autocomplete, params: {q: '*'}, session: valid_session
+      expect(response).to be_success
+    end
+  end
+
   describe "GET #show" do
     it "returns a success response" do
       my_event = MyEvent.create! valid_attributes
