@@ -83,7 +83,3 @@ Rails.application.configure do
 end
 
 Elasticsearch::Model.client = Elasticsearch::Client.new url: ENV['BONSAI_URL']
-
-Sidekiq.configure_client do |config|
-  config.redis = { size: 3, url: ENV["REDIS_URL"] }
-end
