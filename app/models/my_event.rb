@@ -43,8 +43,8 @@ class MyEvent
   end
 
   def url
-    self.referer && [self.referer[:scheme], '://', self.referer[:host],
-      self.referer[:path], self.referer[:query], self.referer[:fragment]].compact.join('')
+    self.referer && [self.referer['scheme'], '://', self.referer['host'],
+      self.referer['path'], self.referer['query'], self.referer['fragment']].compact.join('')
   end
 
   def as_indexed_json(options={})
