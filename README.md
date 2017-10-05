@@ -4,7 +4,7 @@ Aplicação desenvolvida com intuito de demonstrar minha capacidade técnica em 
 
 O projeto foi hospedado em https://myevent-api.herokuapp.com/my_events.
 
-Um exemplo de consumo pode ser acesso em https://jsbin.com/rudeboj/edit?html,output.
+Um exemplo de consumo pode ser acesso em https://jsbin.com/pitejuv/edit?html,css,output
 
 A documentação da API pode ser acessada em http://docs.raphoxmyeventapi.apiary.io/.
 
