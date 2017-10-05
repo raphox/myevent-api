@@ -65,6 +65,7 @@ class MyEventsController < ApplicationController
     def my_event_params
       params.require(:my_event).permit(:event_type, :remote_ip,
         :referer => [:scheme, :host, :path, :query, :fragment])
-        .merge(request: request)
+        # TODO: Use if you want get info from request
+        # .merge(request: request)
     end
 end
