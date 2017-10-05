@@ -1,0 +1,224 @@
+FORMAT: 1A
+HOST: https://myevent-api.herokuapp.com/
+
+# My Event API
+
+Está é minha documentação de exemplo para especificação de *endpoints* de uma API.
+
+Tratasse de uma API RESTful para listagem, adição, remoção e atualização de um modelo específico.
+
+# API Root [/]
+
+A página inicial da API não oferece nenhuma funcionalidade. É necessário conhecer os demais
+serviços disponível para ter acesso as suas funcionalidades.
+
+## Pontos de entrada disponíveis [GET]
+
++ Response 200 (application/json)
+
+        {
+            "my_events_url": "/my_events"
+        }
+
+## Group MyEvent
+
+*Resources* relacionada aos itens de eventos da API.
+
+## Evento [/my_events/{my_event_id}]
+
++ Parameters
+
+    + my_event_id: 59d517f81c0bb20004fd95f3 (required, number) - ID do evento em formato numério e inteiro.
+
++ Attributes (object)
+
+    + data (object)
+        + id: 59d517f81c0bb20004fd95f3 (string, required)
+        + type: `my-events` (string)
+        + attributes (MyEvent)
+
+### Visualizar [GET]
+
++ Response 200 (application/vnd.api+json)
+
+        {
+            "data": {
+                "id": "59d517f81c0bb20004fd95f3",
+                "type": "my-events",
+                "attributes": {
+                    "event-type": "post",
+                    "referer": {
+                        "scheme": "https",
+                        "host": "www.submarino.com.br",
+                        "path": "/produto/132118334/notebook-samsung-gaming-odyssey-intel-core-i7-8gb-geforce-gtx-1050-de-4gb-1tb-tela-led-full-hd-15-6-windows-10-preto",
+                        "query": "chave=prf_hm_oh_2_0&hl=lower",
+                        "fragment": null
+                    },
+                    "remote-ip": "170.233.174.80"
+                }
+            }
+        }
+
+### Atualizar [PUT]
+
++ Attributes (MyEvent)
+
++ Request (application/json)
+
+        {
+            "event-type": "post",
+            "referer": {
+                "scheme": "https",
+                "host": "www.americanas.com.br",
+                "path": "/produto/111042393/conjunto-de-panelas-tramontina-versalhes-aluminio-antiaderente-5-pecas",
+                "query": "chave=prf_hm_0_oh_3_txar_00&cor=BRONZE&hl=lower",
+                "fragment": null
+            },
+            "remote-ip": "170.233.174.80"
+        }
+
++ Response 200 (application/vnd.api+json)
+
+        {
+            "data": {
+                "id": "59d517f81c0bb20004fd95f3",
+                "type": "my-events",
+                "attributes": {
+                    "event-type": "post",
+                    "referer": {
+                        "scheme": "https",
+                        "host": "www.submarino.com.br",
+                        "path": "/produto/132118334/notebook-samsung-gaming-odyssey-intel-core-i7-8gb-geforce-gtx-1050-de-4gb-1tb-tela-led-full-hd-15-6-windows-10-preto",
+                        "query": "chave=prf_hm_oh_2_0&hl=lower",
+                        "fragment": null
+                    },
+                    "remote-ip": "170.233.174.80"
+                }
+            }
+        }
+
+### Remover [DELETE]
+
++ Response 204
+
+## Eventos [/my_events{?page}]
+
+### Listar [GET]
+
++ Parameters
+
+    + page (optional, Pager) - Informações para paginação
+
++ Response 200 (application/vnd.api+json)
+
+            {
+                "data": [
+                    {
+                        "id": "59d517f81c0bb20004fd95f3",
+                        "type": "my-events",
+                        "attributes": {
+                            "event-type": "post",
+                            "referer": {
+                                "scheme": "https",
+                                "host": "www.submarino.com.br",
+                                "path": "/produto/132118334/notebook-samsung-gaming-odyssey-intel-core-i7-8gb-geforce-gtx-1050-de-4gb-1tb-tela-led-full-hd-15-6-windows-10-preto",
+                                "query": "chave=prf_hm_oh_2_0&hl=lower",
+                                "fragment": null
+                            },
+                            "remote-ip": "170.233.174.80"
+                        }
+                    }
+                ]
+            }
+
+### Criar [POST]
+
+Você pode criar um novo evento utilizando esta ação. Ela recebe um *JSON dictionary* contendo as informações do evento.
+
++ Attributes (MyEvent)
+
++ Request (application/json)
+
+            {
+                "event-type": "post",
+                "referer": {
+                    "scheme": "https",
+                    "host": "www.americanas.com.br",
+                    "path": "/produto/111042393/conjunto-de-panelas-tramontina-versalhes-aluminio-antiaderente-5-pecas",
+                    "query": "chave=prf_hm_0_oh_3_txar_00&cor=BRONZE&hl=lower",
+                    "fragment": null
+                },
+                "remote-ip": "170.233.174.80"
+            }
+
++ Response 201 (application/vnd.api+json)
+
+            {
+                "data": {
+                    "id": "59d56a656e31c50004da80d6",
+                    "type": "my-events",
+                    "attributes": {
+                        "event-type": "post",
+                        "referer": {
+                            "scheme": "https",
+                            "host": "www.americanas.com.br",
+                            "path": "/produto/111042393/conjunto-de-panelas-tramontina-versalhes-aluminio-antiaderente-5-pecas",
+                            "query": "chave=prf_hm_0_oh_3_txar_00&cor=BRONZE&hl=lower",
+                            "fragment": null
+                        },
+                        "remote-ip": "170.233.174.80"
+                    }
+                }
+            }
+
+## Autocomplete [/my_events/autocomplete{?page,q}]
+
+### Listar [GET]
+
++ Parameters
+
+    + page (optional, Pager) - Informações para paginação
+    + q: `post` (string) - String para realizar consulta dos eventos
+
++ Response 200 (application/vnd.api+json)
+
+            {
+                "data": [
+                    {
+                        "id": "59d51ba05ec941000446d06c",
+                        "type": "my-events",
+                        "attributes": {
+                            "key": "59d51ba05ec941000446d06c",
+                            "label": "POST: https://www.americanas.com.br/produto/111042393/conjunto-de-panelas-tramontina-versalhes-aluminio-antiaderente-5-pecaschave=prf_hm_0_oh_3_txar_00&cor=BRONZE&hl=lower"
+                        }
+                    }
+                ]
+            }
+
+# Data Structures
+
+## Pager (object)
+
++ number: 1 (number)
++ size: 25 (number)
+
+## MyEvent (object)
+
++ `event-type`: post (enum[string])
+    + Members
+        + get
+        + post
+        + put
+        + patch
+        + delete
+        + options
+        + head
+
++ referer (object)
+    + scheme: `https` (string)
+    + host: `www.submarino.com.br` (string)
+    + path: `/produto/132118334/notebook` (string)
+    + query: `chave=prf_hm_oh_2_0&hl=lower` (string)
+    + fragment: `anchor` (string)
+
++ `remote-ip`: `170.233.174.80` (string)

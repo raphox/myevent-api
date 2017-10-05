@@ -18,9 +18,9 @@ class MyEventsController < ApplicationController
     # Collect results without access to database to improve performance
     @my_events = MyEvent.page(params[:page][:number])
       .per(params[:page][:size])
-      .search(params[:q])
+      .search("*#{params[:q]}*")
       .results
-      .map{ |r| MyEvent.new(r._source.to_hash.merge({ id: r._id })) }
+      .map{ |r| MyEvent.new_from_index(r) }
 
     render json: @my_events, each_serializer: MyEventAutocompleteSerializer
   end

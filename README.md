@@ -1,24 +1,26 @@
-# README
+# My Event API
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Aplicação desenvolvida com intuito de demonstrar minha capacidade técnica em Ruby on Rails e conhecimentos em geral.
 
-Things you may want to cover:
+O projeto foi hospedado em https://myevent-api.herokuapp.com/my_events.
 
-* Ruby version
+Um exemplo de consumo pode ser acesso em https://jsbin.com/rudeboj/edit?html,output.
 
-* System dependencies
+A documentação da API pode ser acessada em http://docs.raphoxmyeventapi.apiary.io/.
 
-* Configuration
+## Requisitos
 
-* Database creation
+* Ruby 2.4.1+
+* Ruby on Rails 5.1.4+
+* MongoDB 3.4.6+
+* sidekiq 5+
+* Elasticsearch 1.7.6+
 
-* Database initialization
+## Features
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* CRUD do *model* `MyEvent`
+* Metodo de consulta de registro por string para popular sugestões de um *autocomplete* do *model* `MyEvent`
+* API RESTful em formato JSON API
+* Indexação de dados com Elasticsearch para otimizar consultas de registros
+* Utilizado MongoDB para aumentar a capacidade de inserção de registros
+* Uitilizado Sidekiq para não prejudicar o desempenho do MongoDB durante a inserção de registros

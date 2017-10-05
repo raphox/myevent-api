@@ -9,6 +9,33 @@ class MyEvent
   field :referer, type: Hash
   field :remote_ip, type: String
 
+  # Define Elasticsearch settings
+  settings index: {
+    :number_of_shards => 1,
+    analysis: {
+      analyzer: {
+          default: {
+            type: "custom",
+            tokenizer: "whitespace",
+            filter: ["lowercase", "asciifolding"] # discard lowercase and special chars
+          }
+      }
+    }
+  } do
+    mapping dynamic: 'false' do
+      indexes :event_type, analyzer: 'default', type: 'string'
+      indexes :url, analyzer: 'default', type: 'string'
+      indexes :referer, type: 'object'
+      indexes :remote_ip, analyzer: 'default', type: 'string'
+    end
+  end
+
+  # Collect data to store on Elasticsearch
+  def as_indexed_json(options={})
+    as_json(except: [:id, :_id]).merge(url: self.url)
+  end
+
+  # Call background process to create index on Elasticsearch
   after_save    { IndexerWorker.perform_async(:index,  self.id) }
   after_destroy { IndexerWorker.perform_async(:delete, self.id) }
 
@@ -47,7 +74,8 @@ class MyEvent
       self.referer['path'], self.referer['query'], self.referer['fragment']].compact.join('')
   end
 
-  def as_indexed_json(options={})
-    as_json(except: [:id, :_id])
+  # Intance a new object from an Elasticsearch result
+  def self.new_from_index(result)
+    self.new(result._source.to_hash.except('url').merge({ id: result._id }))
   end
 end
