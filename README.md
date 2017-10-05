@@ -18,9 +18,9 @@ A documentação da API pode ser acessada em http://docs.raphoxmyeventapi.apiary
 
 ## Features
 
-* CRUD do *model* `MyEvent`
+* CRUD (create, read, update and delete) do *model* `MyEvent`
 * Método de consulta de registro por *string* para popular sugestões de um *autocomplete* do *model* `MyEvent`
-* API RESTful em formato JSON API
-* Indexação de dados com Elasticsearch para otimizar consultas de registros
-* Utilizado MongoDB para aumentar a capacidade de inserção de registros
-* Utilizado Sidekiq para não prejudicar o desempenho do MongoDB durante a inserção de registros
+* API [RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer) em formato [JSON API](http://jsonapi.org/)
+* Indexação de dados com [Elasticsearch](https://www.elastic.co/products/elasticsearch) para otimizar consultas de registros
+* Utilizado [MongoDB](https://www.mongodb.com/) para aumentar a capacidade de inserção de registros
+* Utilizado [Sidekiq](http://sidekiq.org/) para criação de index no *Elasticsearch* sem prejudicar o desempenho do MongoDB durante a inserção de registros
