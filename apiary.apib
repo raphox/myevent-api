@@ -61,12 +61,12 @@ serviços disponível para ter acesso as suas funcionalidades.
 
 ### Atualizar [PUT]
 
-+ Attributes (MyEvent)
++ Attributes (MyEventRequest)
 
 + Request (application/json)
 
         {
-            "event-type": "post",
+            "event_type": "post",
             "referer": {
                 "scheme": "https",
                 "host": "www.americanas.com.br",
@@ -74,7 +74,7 @@ serviços disponível para ter acesso as suas funcionalidades.
                 "query": "chave=prf_hm_0_oh_3_txar_00&cor=BRONZE&hl=lower",
                 "fragment": null
             },
-            "remote-ip": "170.233.174.80"
+            "remote_ip": "170.233.174.80"
         }
 
 + Response 200 (application/vnd.api+json)
@@ -135,12 +135,12 @@ serviços disponível para ter acesso as suas funcionalidades.
 
 Você pode criar um novo evento utilizando esta ação. Ela recebe um *JSON dictionary* contendo as informações do evento.
 
-+ Attributes (MyEvent)
++ Attributes (MyEventRequest)
 
 + Request (application/json)
 
             {
-                "event-type": "post",
+                "event_type": "post",
                 "referer": {
                     "scheme": "https",
                     "host": "www.americanas.com.br",
@@ -148,7 +148,7 @@ Você pode criar um novo evento utilizando esta ação. Ela recebe um *JSON dict
                     "query": "chave=prf_hm_0_oh_3_txar_00&cor=BRONZE&hl=lower",
                     "fragment": null
                 },
-                "remote-ip": "170.233.174.80"
+                "remote_ip": "170.233.174.80"
             }
 
 + Response 201 (application/vnd.api+json)
@@ -222,3 +222,24 @@ Você pode criar um novo evento utilizando esta ação. Ela recebe um *JSON dict
     + fragment: `anchor` (string)
 
 + `remote-ip`: `170.233.174.80` (string)
+
+## MyEventRequest (object)
+
++ `event_type`: post (enum[string])
+    + Members
+        + get
+        + post
+        + put
+        + patch
+        + delete
+        + options
+        + head
+
++ referer (object)
+    + scheme: `https` (string)
+    + host: `www.submarino.com.br` (string)
+    + path: `/produto/132118334/notebook` (string)
+    + query: `chave=prf_hm_oh_2_0&hl=lower` (string)
+    + fragment: `anchor` (string)
+
++ `remote_ip`: `170.233.174.80` (string)
