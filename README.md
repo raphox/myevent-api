@@ -1,5 +1,7 @@
 # My Event API
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/610dc9d20a1a4ec8b06a66a389713da2)](https://app.codacy.com/app/raphox/myevent-api?utm_source=github.com&utm_medium=referral&utm_content=raphox/myevent-api&utm_campaign=Badge_Grade_Settings)
+
 Aplicação desenvolvida com intuito de demonstrar minha capacidade técnica em Ruby on Rails e conhecimentos em geral.
 
 O projeto foi hospedado em https://myevent-api.herokuapp.com/my_events.
